@@ -1,18 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './index.css';
-
-function ItsWorking() {
-  return <div><h1>Job Serch basic page</h1></div>;
-}
-
-function Jobs() {
-  return <div><h1>Jobs</h1></div>;
-}
-
-function Recruiters() {
-  return <div><h1>Recruiters</h1></div>;
-}
+import JobsList from './components/jobs/JobsList';
+import RecruitersList from './components/recruiters/RecruitersList';
 
 function NotFound() {
   return <div>Not found</div>;
@@ -21,9 +11,8 @@ function NotFound() {
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route index element={<ItsWorking />} />
-      <Route path="jobs" element={<Jobs />} />
-      <Route path="recruiters" element={<Recruiters />} />
+      <Route path="jobs" element={<JobsList />} />
+      <Route path="recruiters" element={<RecruitersList />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
