@@ -12,7 +12,8 @@ export default class BaseApi {
 
   get(query?: Record<string, any>) {
     const searchParams = new URLSearchParams(query).toString();
-    return this.axiosWithAuth.get(`${this.endpoint}${query ? '?' + searchParams : ''}`);
+    const headers = { 'X-Trace-ID': crypto.randomUUID() };
+    return this.axiosWithAuth.get(`${this.endpoint}${query ? '?' + searchParams : ''}`, { headers });
   }
 
   getOne(id: string) {
