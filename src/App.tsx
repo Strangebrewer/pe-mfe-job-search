@@ -11,8 +11,12 @@ function NotFound() {
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="jobs" element={<JobsList />} />
-      <Route path="recruiters" element={<RecruitersList />} />
+      <Route index element={
+        <div>
+          <JobsList />
+          <RecruitersList />
+        </div>
+      } />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
