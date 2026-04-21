@@ -49,7 +49,8 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
 
   function saveLinkEdit() {
     if (!editingLink) return;
-    const { group, url, text } = editingLink;
+    const { group, url } = editingLink;
+    const text = editingLink.text || (group === 'primary' ? 'LinkedIn' : 'Direct');
     const urlField = group === 'primary' ? 'primaryLink' : 'secondaryLink';
     const textField = group === 'primary' ? 'primaryLinkText' : 'secondaryLinkText';
     const originalUrl = job[urlField] || '';
