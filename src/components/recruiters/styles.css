@@ -22,7 +22,7 @@
     cursor: pointer;
     display: flex;
     gap: 3px;
-    color: #f5a623;
+    color: #51CB20;
     font-size: 15px;
 
     & > i {
@@ -49,8 +49,8 @@
 }
 
 .recruiters-grid-header {
-  background-color: #fff;
-  border-bottom: 2px solid #ccc;
+  background-color: #1a0f2e;
+  border-bottom: 2px solid #BC13FE;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -62,10 +62,10 @@
 }
 
 .recruiter-grid-row-wrapper {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(188, 19, 254, 0.2);
 
   &:hover > .recruiter-grid-row > div {
-    background-color: #f5f5f5;
+    background-color: rgba(188, 19, 254, 0.08);
   }
 }
 
@@ -91,7 +91,7 @@
     cursor: pointer;
     display: flex;
     gap: 3px;
-    color: #f5a623;
+    color: #51CB20;
     font-size: 15px;
 
     & > i {

@@ -3,7 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useGetRecruiters } from "../../hooks/recruiterHooks";
 import { STATUS_OPTIONS, WORK_FROM_OPTIONS } from "../../utils/constants";
-import { Button } from "@bka-stuff/pe-mfe-utils";
+import { Button } from '@bka-stuff/pe-mfe-utils';
 import { useJobFilterStore } from "../../store/jobs/jobFilterStore";
 
 const JobsFilter: FC = () => {
@@ -84,13 +84,13 @@ const JobsFilter: FC = () => {
           selectsEnd
           startDate={dateMin}
           endDate={dateMax}
-          minDate={dateMin}
+          minDate={dateMin ?? undefined}
           isClearable
         />
       </div>
 
       <div className="jobs-filter-actions">
-        <Button variant="red" text="Search" onClick={handleSearch} />
+        <Button variant="blue" text="Search" onClick={handleSearch} />
         <Button variant="grey" text="Clear" onClick={handleClear} />
       </div>
 

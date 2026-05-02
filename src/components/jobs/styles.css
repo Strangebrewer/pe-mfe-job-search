@@ -22,12 +22,11 @@
 }
 
 .job-modal-date-picker {
-  background-color: #ddd;
-  border: none;
+  background-color: #0d0a14;
+  border: 1px solid #BC13FE;
   border-radius: 4px;
-  box-shadow: inset 3px 3px 2px #aaa,
-    inset -3px -3px 2px #fff;
-  color: var(--indigo);
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: #f0e6ff;
   display: block;
   font-weight: 500;
   margin-bottom: 6px;
@@ -54,11 +53,10 @@
 }
 
 .jobs-grid-header {
-  background-color: #fff;
-  border-bottom: 2px solid #ccc;
+  background-color: #1a0f2e;
+  border-bottom: 2px solid #BC13FE;
   position: sticky;
   top: 0;
-  z-index: 1;
 
   & > div {
     font-weight: 600;
@@ -76,25 +74,25 @@
   user-select: none;
 
   &:hover {
-    color: #555;
+    color: #f0e6ff;
   }
 
   & > i {
-    color: #aaa;
+    color: #c4b5fd;
     font-size: 12px;
   }
 
   & > i.fa-sort-up,
   & > i.fa-sort-down {
-    color: #333;
+    color: #BC13FE;
   }
 }
 
 .job-grid-row-wrapper {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid rgba(188, 19, 254, 0.2);
 
   &:hover > .job-grid-row > div {
-    background-color: #f5f5f5;
+    background-color: rgba(188, 19, 254, 0.08);
   }
 }
 
@@ -188,11 +186,13 @@
 
 .jobs-filter-input,
 .jobs-filter-select {
-  border: 1px solid #ccc;
+  border: 1px solid #BC13FE;
   border-radius: 4px;
   font-size: 13px;
   height: 30px;
   padding: 0 8px;
+  background: #0d0a14;
+  color: #f0e6ff;
 }
 
 .jobs-filter-input {
@@ -241,7 +241,7 @@
   }
 
   & .--link-label {
-    color: #888;
+    color: #c4b5fd;
     font-size: 11px;
     font-weight: 600;
     min-width: 55px;
@@ -249,19 +249,19 @@
   }
 
   & .--link-anchor {
-    color: #2563eb;
+    color: #00E5FF;
     cursor: pointer;
     text-decoration: underline;
   }
 
   & .--invalid-url {
-    color: #aaa;
+    color: #c4b5fd;
     font-size: 12px;
     margin-left: 4px;
   }
 
   & .--empty {
-    color: #bbb;
+    color: #c4b5fd;
     font-style: italic;
   }
 

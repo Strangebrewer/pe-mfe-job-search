@@ -7,24 +7,28 @@
   width: 100%;
 
   &:hover {
-    background-color: rgba(0, 0, 0, 0.06);
+    background-color: rgba(188, 19, 254, 0.12);
   }
 }
 
 .--inline-input {
-  border: 1px solid #aaa;
+  border: 1px solid #BC13FE;
   border-radius: 3px;
   font-size: inherit;
   padding: 1px 4px;
   width: 100%;
+  background: #0d0a14;
+  color: #f0e6ff;
 }
 
 .--inline-select {
-  border: 1px solid #ccc;
+  border: 1px solid #BC13FE;
   border-radius: 3px;
   font-size: inherit;
   padding: 2px 4px;
   width: 100%;
+  background: #0d0a14;
+  color: #f0e6ff;
 }
 
 .--expansion-wrapper {
@@ -42,7 +46,7 @@
 }
 
 .--expanded-content {
-  background-color: #fafafa;
+  background-color: rgba(26, 15, 46, 0.6);
   padding: 16px 24px;
 }
 
@@ -71,11 +75,13 @@
   }
 
   & .--add-input {
-    border: 1px solid #ccc;
+    border: 1px solid #BC13FE;
     border-radius: 4px;
     font-size: 14px;
     margin-top: 4px;
     padding: 4px 8px;
     width: 100%;
+    background: #0d0a14;
+    color: #f0e6ff;
   }
 }
