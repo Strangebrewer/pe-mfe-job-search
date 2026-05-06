@@ -2,32 +2,21 @@
 @source "../node_modules/@bka-stuff/pe-mfe-utils/dist";
 @import "./styles/shared.css";
 
-:root {
-  --indigo: #f0e6ff;
-  --candy: #e22c5a;
+@theme {
+  --color-purple: var(--nPurple);
+  --color-purpleAlpha: var(--nPurpleAlpha);
+  --color-red: var(--candy);
+  --color-redAlpha: var(--candyAlpha);
+  --color-green: var(--lime);
+  --color-greenAlpha: var(--limeAlpha);
+  --color-blue: var(--nCyan);
+  --color-blueAlpha: var(--nCyanAlpha);
+  --color-surface: var(--surface);
+  --color-bg: var(--baseBg);
+  --color-primary: var(--textPrimary);
+  --color-muted: var(--textMuted);
 }
 
 body {
-  color: #f0e6ff;
-}
-
-.bka-modal-wrapper {
-  background: rgba(13, 10, 20, 0.85);
-}
-
-.bka-modal-body {
-  background: #1a0f2e;
-  border-color: #BC13FE;
-  color: #f0e6ff;
-}
-
-.bka-form-element {
-  background: #0d0a14;
-  color: #f0e6ff;
-  border: 1px solid #BC13FE;
-  box-shadow: none;
-}
-
-.bka-select {
-  color: #f0e6ff;
+  color: var(--textPrimary);
 }

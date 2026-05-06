@@ -102,9 +102,9 @@ const RecruiterModal: FC<RecruiterModalProps> = ({ isOpen, onClose }) => {
 
           <div className="tw:mt-[16px] tw:flex tw:justify-end">
             <button type="submit" style={{ display: 'none' }} />
-            <Button variant="red" text="Cancel" onClick={closeModal} />
+            <Button color="red" text="Cancel" onClick={closeModal} />
             <Button
-              variant="blue"
+              color="blue"
               text="Save"
               onClick={submit}
               disabled={!name || !company || !email}

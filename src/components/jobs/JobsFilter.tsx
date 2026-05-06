@@ -90,8 +90,8 @@ const JobsFilter: FC = () => {
       </div>
 
       <div className="jobs-filter-actions">
-        <Button variant="blue" text="Search" onClick={handleSearch} />
-        <Button variant="grey" text="Clear" onClick={handleClear} />
+        <Button color="blue" text="Search" onClick={handleSearch} />
+        <Button color="grey" text="Clear" onClick={handleClear} />
       </div>
 
       <div className="jobs-filter-checks">

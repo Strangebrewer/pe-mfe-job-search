@@ -17,9 +17,9 @@ const DeleteConfirmationModal: FC<DeleteConfirmationModalProps> = ({ isOpen, ite
       <div className="delete-confirmation-modal">
         <p className="tw:mb-[24px]">Are you sure you want to {action} {item?.name}?</p>
         <div className="delete-confirmation-modal--buttons">
-          <Button variant="grey" text="Cancel" onClick={onClose} />
+          <Button color="grey" text="Cancel" onClick={onClose} />
           <Button
-            variant="red"
+            color="red"
             text={actionLabel}
             onClick={onConfirm}
             last

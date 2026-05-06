@@ -186,9 +186,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
 
           <div className="tw:mt-[16px] tw:flex tw:justify-end">
             <button type="submit" style={{ display: 'none' }} />
-            <Button variant="red" text="Cancel" onClick={closeModal} />
+            <Button color="red" text="Cancel" onClick={closeModal} />
             <Button
-              variant="green"
+              color="green"
               text="Save"
               onClick={submit}
               disabled={!validateForm()}
