@@ -8,19 +8,19 @@ import { useGetRecruiters } from "../../hooks/recruiterHooks";
 type JobModalProps = {
   isOpen: boolean;
   onClose: () => void;
-}
+};
 
 const EMPTY_FORM = {
-  jobTitle: '',
-  workFrom: 'remote',
-  recruiterId: '',
+  jobTitle: "",
+  workFrom: "remote",
+  recruiterId: "",
   dateApplied: new Date() as Date | null,
-  companyName: '',
-  companyAddress: '',
-  companyCity: '',
-  companyState: '',
-  pointOfContact: '',
-  pocTitle: '',
+  companyName: "",
+  companyAddress: "",
+  companyCity: "",
+  companyState: "",
+  pointOfContact: "",
+  pocTitle: "",
 };
 
 const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
@@ -29,7 +29,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
   const { mutate: createJob } = useCreateJob();
 
   function set(field: string, value: any) {
-    setForm(f => ({ ...f, [field]: value }));
+    setForm((f) => ({ ...f, [field]: value }));
   }
 
   function closeModal() {
@@ -38,7 +38,12 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
   }
 
   function validateForm() {
-    return !!form.jobTitle && !!form.workFrom && !!form.dateApplied && !!form.companyName;
+    return (
+      !!form.jobTitle &&
+      !!form.workFrom &&
+      !!form.dateApplied &&
+      !!form.companyName
+    );
   }
 
   function submit(e?: SyntheticEvent) {
@@ -49,9 +54,15 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
       workFrom: form.workFrom,
       dateApplied: form.dateApplied?.toISOString(),
       companyName: form.companyName,
-      status: 'applied',
+      status: "applied",
     };
-    if (form.recruiterId) jobToSave.recruiterId = form.recruiterId;
+    if (form.recruiterId) {
+      jobToSave.recruiterId = form.recruiterId;
+    } else {
+      jobToSave.recruiterId = recruiters?.find(
+        (r: any) => r.name === "No Recruiter",
+      )?.id;
+    }
     if (form.companyAddress) jobToSave.companyAddress = form.companyAddress;
     if (form.companyCity) jobToSave.companyCity = form.companyCity;
     if (form.companyState) jobToSave.companyState = form.companyState;
@@ -73,7 +84,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               type="text"
               name="jobTitle"
               value={form.jobTitle}
-              onChange={(e) => set('jobTitle', e.target.value)}
+              onChange={(e) => set("jobTitle", e.target.value)}
               full
               autofocus
             />
@@ -85,7 +96,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               type="text"
               name="companyName"
               value={form.companyName}
-              onChange={(e) => set('companyName', e.target.value)}
+              onChange={(e) => set("companyName", e.target.value)}
               full
             />
           </div>
@@ -95,7 +106,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
             <Select
               name="workFrom"
               value={form.workFrom}
-              onChange={(e) => set('workFrom', e.target.value)}
+              onChange={(e) => set("workFrom", e.target.value)}
               full
             >
               <option value="remote">Remote</option>
@@ -109,12 +120,14 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
             <Select
               name="recruiterId"
               value={form.recruiterId}
-              onChange={(e) => set('recruiterId', e.target.value)}
+              onChange={(e) => set("recruiterId", e.target.value)}
               full
             >
               <option value="">--Select a recruiter</option>
               {recruiters?.map((r: any) => (
-                <option key={r.id} value={r.id}>{r.name}</option>
+                <option key={r.id} value={r.id}>
+                  {r.name}
+                </option>
               ))}
             </Select>
           </div>
@@ -124,7 +137,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
             <DatePicker
               wrapperClassName="job-modal-date-picker"
               selected={form.dateApplied}
-              onChange={(date: Date | null) => set('dateApplied', date)}
+              onChange={(date: Date | null) => set("dateApplied", date)}
               placeholderText="Select a date"
             />
           </div>
@@ -135,7 +148,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               type="text"
               name="companyAddress"
               value={form.companyAddress}
-              onChange={(e) => set('companyAddress', e.target.value)}
+              onChange={(e) => set("companyAddress", e.target.value)}
               full
             />
           </div>
@@ -146,7 +159,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               type="text"
               name="companyCity"
               value={form.companyCity}
-              onChange={(e) => set('companyCity', e.target.value)}
+              onChange={(e) => set("companyCity", e.target.value)}
               full
             />
           </div>
@@ -157,7 +170,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               type="text"
               name="companyState"
               value={form.companyState}
-              onChange={(e) => set('companyState', e.target.value)}
+              onChange={(e) => set("companyState", e.target.value)}
               full
             />
           </div>
@@ -168,7 +181,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               type="text"
               name="pointOfContact"
               value={form.pointOfContact}
-              onChange={(e) => set('pointOfContact', e.target.value)}
+              onChange={(e) => set("pointOfContact", e.target.value)}
               full
             />
           </div>
@@ -179,13 +192,13 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               type="text"
               name="pocTitle"
               value={form.pocTitle}
-              onChange={(e) => set('pocTitle', e.target.value)}
+              onChange={(e) => set("pocTitle", e.target.value)}
               full
             />
           </div>
 
           <div className="tw:mt-[16px] tw:flex tw:justify-end">
-            <button type="submit" style={{ display: 'none' }} />
+            <button type="submit" style={{ display: "none" }} />
             <Button color="red" text="Cancel" onClick={closeModal} />
             <Button
               color="green"
