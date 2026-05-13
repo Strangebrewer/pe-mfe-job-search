@@ -11,15 +11,18 @@ function NotFound() {
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route index element={
-        <div>
-          <JobsList />
-          <RecruitersList />
-        </div>
-      } />
+      <Route
+        index
+        element={
+          <div className="tw:flex tw:flex-wrap">
+            <JobsList />
+            <RecruitersList />
+          </div>
+        }
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
-}
+};
 
 export default App;

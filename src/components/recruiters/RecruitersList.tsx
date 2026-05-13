@@ -1,10 +1,13 @@
-import { FC, useState } from "react";
-import { ActionButton } from "@bka-stuff/pe-mfe-utils";
-import { useDeleteRecruiter, useGetRecruiters, useUpdateRecruiter } from "../../hooks/recruiterHooks";
-import RecruiterModal from "./RecruiterModal";
-import DeleteConfirmationModal from "../shared/DeleteConfirmationModal";
-import RecruiterRow from "./RecruiterRow";
-import "./styles.css";
+import { FC, useState } from 'react';
+import { ActionButton, DeleteConfirmationModal } from '@bka-stuff/pe-mfe-utils';
+import {
+  useDeleteRecruiter,
+  useGetRecruiters,
+  useUpdateRecruiter,
+} from '../../hooks/recruiterHooks';
+import RecruiterModal from './RecruiterModal';
+import RecruiterRow from './RecruiterRow';
+import './styles.css';
 
 const RecruitersList: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,23 +39,19 @@ const RecruitersList: FC = () => {
     <div className="recruiters-container">
       <DeleteConfirmationModal
         isOpen={modalState.type === 'delete'}
-        item={modalState.item}
+        name={modalState.item?.name}
         onConfirm={confirmDelete}
         onClose={() => setModalState({ type: null, item: null })}
       />
       <DeleteConfirmationModal
-        action="archive"
         isOpen={modalState.type === 'archive'}
-        item={modalState.item}
+        name={modalState.item?.name}
         onConfirm={confirmArchive}
         onClose={() => setModalState({ type: null, item: null })}
       />
       <h2>
         Recruiters&nbsp;
-        <ActionButton
-          iconClass="fas fa-plus"
-          onClick={() => setIsOpen(true)}
-        />
+        <ActionButton iconClass="fas fa-plus" onClick={() => setIsOpen(true)} />
       </h2>
       <div className="recruiters-grid">
         <div className="recruiters-grid-header">
@@ -65,7 +64,12 @@ const RecruitersList: FC = () => {
           <div></div>
         </div>
         {recruiters?.map((r: any) => (
-          <RecruiterRow key={r.id} recruiter={r} onClickDelete={openDeleteModal} onClickArchive={openArchiveModal} />
+          <RecruiterRow
+            key={r.id}
+            recruiter={r}
+            onClickDelete={openDeleteModal}
+            onClickArchive={openArchiveModal}
+          />
         ))}
       </div>
       <RecruiterModal isOpen={isOpen} onClose={() => setIsOpen(false)} />

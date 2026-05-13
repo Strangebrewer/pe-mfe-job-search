@@ -37,6 +37,7 @@ const JobsFilter: FC = () => {
           placeholder="Company"
           value={companyInput}
           onChange={e => setCompanyInput(e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && handleSearch()}
         />
 
         <select

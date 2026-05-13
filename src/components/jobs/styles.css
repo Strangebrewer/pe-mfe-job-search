@@ -2,6 +2,7 @@
   min-height: 300px;
   padding: 12px;
   width: 1400px;
+  margin: 0 auto;
 
   & > h2 {
     font-size: 36px;
@@ -168,9 +169,9 @@
 
 .jobs-filter {
   display: flex;
-  align-items: flex-end;
+  /* align-items: flex-end; */
   gap: 12px;
-  margin-bottom: 16px;
+  margin: 0 auto 16px;
   flex-wrap: wrap;
   position: relative;
 }
@@ -249,7 +250,7 @@
   }
 
   & .--link-anchor {
-    color: #00E5FF;
+    color: #00e5ff;
     cursor: pointer;
     text-decoration: underline;
   }
