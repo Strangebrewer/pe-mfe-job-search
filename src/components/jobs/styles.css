@@ -43,8 +43,13 @@
 .jobs-grid {
   max-height: 800px;
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   position: relative;
   width: 100%;
+}
+.jobs-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .jobs-grid-header,

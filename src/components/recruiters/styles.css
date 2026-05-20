@@ -39,8 +39,13 @@
 .recruiters-grid {
   max-height: 500px;
   overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   position: relative;
   width: 100%;
+}
+.recruiters-grid::-webkit-scrollbar {
+  display: none;
 }
 
 .recruiters-grid-header,
