@@ -201,6 +201,7 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
                 onChange={e => { updateJob({ ...job, recruiterId: e.target.value }); cancelEdit(); }}
                 onBlur={cancelEdit}
               >
+                <option value="">-- None</option>
                 {recruiters?.map((r: Obj) => (
                   <option key={r.id} value={r.id}>{r.name}</option>
                 ))}

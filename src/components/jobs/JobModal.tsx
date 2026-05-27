@@ -56,13 +56,7 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
       companyName: form.companyName,
       status: "applied",
     };
-    if (form.recruiterId) {
-      jobToSave.recruiterId = form.recruiterId;
-    } else {
-      jobToSave.recruiterId = recruiters?.find(
-        (r: any) => r.name === "No Recruiter",
-      )?.id;
-    }
+    if (form.recruiterId) jobToSave.recruiterId = form.recruiterId;
     if (form.companyAddress) jobToSave.companyAddress = form.companyAddress;
     if (form.companyCity) jobToSave.companyCity = form.companyCity;
     if (form.companyState) jobToSave.companyState = form.companyState;
