@@ -1,12 +1,12 @@
-import { FC, useState } from "react";
-import { useUpdateRecruiter } from "../../hooks/recruiterHooks";
-import { ActionButton } from "@bka-stuff/pe-mfe-utils";
+import { FC, useState } from 'react';
+import { useUpdateRecruiter } from '../../hooks/recruiterHooks';
+import { ActionButton } from '@bka-stuff/pe-mfe-utils';
 
 type RecruiterRowProps = {
   recruiter: Obj;
   onClickDelete: (id: string, name: string) => void;
   onClickArchive: (id: string, name: string) => void;
-}
+};
 
 const RecruiterRow: FC<RecruiterRowProps> = ({ recruiter, onClickDelete, onClickArchive }) => {
   const [expanded, setExpanded] = useState(false);
@@ -42,8 +42,8 @@ const RecruiterRow: FC<RecruiterRowProps> = ({ recruiter, onClickDelete, onClick
           autoFocus
           className="--inline-input"
           value={editingValue}
-          onChange={e => setEditingValue(e.target.value)}
-          onKeyDown={e => {
+          onChange={(e) => setEditingValue(e.target.value)}
+          onKeyDown={(e) => {
             if (e.key === 'Enter') saveEdit();
             if (e.key === 'Escape') cancelEdit();
           }}
@@ -70,7 +70,10 @@ const RecruiterRow: FC<RecruiterRowProps> = ({ recruiter, onClickDelete, onClick
   }
 
   function removeComment(index: number) {
-    updateRecruiter({ ...recruiter, comments: recruiter.comments.filter((_: string, i: number) => i !== index) });
+    updateRecruiter({
+      ...recruiter,
+      comments: recruiter.comments.filter((_: string, i: number) => i !== index),
+    });
   }
 
   const displayRating = hoverRating || recruiter.rating || 1;
@@ -80,7 +83,7 @@ const RecruiterRow: FC<RecruiterRowProps> = ({ recruiter, onClickDelete, onClick
       <div className="recruiter-grid-row">
         <div className="--toggle-cell">
           <ActionButton
-            iconClass={expanded ? "fas fa-caret-down" : "fas fa-caret-right"}
+            iconClass={expanded ? 'fas fa-caret-down' : 'fas fa-caret-right'}
             color="blue"
             onClick={() => setExpanded(!expanded)}
           />
@@ -92,10 +95,10 @@ const RecruiterRow: FC<RecruiterRowProps> = ({ recruiter, onClickDelete, onClick
         <div className="--truncate">{renderEditable('email', recruiter.email)}</div>
 
         <div className="--stars">
-          {[1, 2, 3, 4, 5].map(i => (
+          {[1, 2, 3, 4, 5].map((i) => (
             <i
               key={i}
-              className={i <= displayRating ? "fas fa-star" : "far fa-star"}
+              className={i <= displayRating ? 'fas fa-star' : 'far fa-star'}
               onClick={() => setRating(i)}
               onMouseEnter={() => setHoverRating(i)}
               onMouseLeave={() => setHoverRating(0)}
@@ -118,7 +121,7 @@ const RecruiterRow: FC<RecruiterRowProps> = ({ recruiter, onClickDelete, onClick
         </div>
       </div>
 
-      <div className={`--expansion-wrapper${expanded ? " is-open" : ""}`}>
+      <div className={`--expansion-wrapper${expanded ? ' is-open' : ''}`}>
         <div className="--expansion-inner">
           <div className="--expanded-content">
             <div className="--expanded-row">
@@ -146,12 +149,18 @@ const RecruiterRow: FC<RecruiterRowProps> = ({ recruiter, onClickDelete, onClick
                     className="--add-input"
                     placeholder="New comment..."
                     value={newComment}
-                    onChange={e => setNewComment(e.target.value)}
-                    onKeyDown={e => {
+                    onChange={(e) => setNewComment(e.target.value)}
+                    onKeyDown={(e) => {
                       if (e.key === 'Enter') submitNewComment();
-                      if (e.key === 'Escape') { setAddingComment(false); setNewComment(''); }
+                      if (e.key === 'Escape') {
+                        setAddingComment(false);
+                        setNewComment('');
+                      }
                     }}
-                    onBlur={() => { setAddingComment(false); setNewComment(''); }}
+                    onBlur={() => {
+                      setAddingComment(false);
+                      setNewComment('');
+                    }}
                   />
                 )}
               </div>

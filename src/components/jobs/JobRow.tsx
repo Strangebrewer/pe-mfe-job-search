@@ -1,24 +1,28 @@
-import { FC, useState } from "react";
-import { useGetRecruiters } from "../../hooks/recruiterHooks";
-import { useUpdateJob } from "../../hooks/jobHooks";
-import { ActionButton } from "@bka-stuff/pe-mfe-utils";
-import DatePicker from "react-datepicker";
-import { format, parseISO } from "date-fns";
-import "react-datepicker/dist/react-datepicker.css";
-import { STATUS_OPTIONS, WORK_FROM_OPTIONS } from "../../utils/constants";
+import { FC, useState } from 'react';
+import { useGetRecruiters } from '../../hooks/recruiterHooks';
+import { useUpdateJob } from '../../hooks/jobHooks';
+import { ActionButton } from '@bka-stuff/pe-mfe-utils';
+import DatePicker from 'react-datepicker';
+import { format, parseISO } from 'date-fns';
+import 'react-datepicker/dist/react-datepicker.css';
+import { STATUS_OPTIONS, WORK_FROM_OPTIONS } from '../../utils/constants';
 
 type JobRowProps = {
   job: Obj;
   onClickDelete: (id: string, name: string) => void;
   onClickArchive: (id: string, name: string) => void;
-}
+};
 
 const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
   const [expanded, setExpanded] = useState(false);
   const [editingField, setEditingField] = useState<string | null>(null);
   const [editingValue, setEditingValue] = useState('');
   const [editingOriginal, setEditingOriginal] = useState('');
-  const [editingLink, setEditingLink] = useState<{ group: 'primary' | 'secondary', url: string, text: string } | null>(null);
+  const [editingLink, setEditingLink] = useState<{
+    group: 'primary' | 'secondary';
+    url: string;
+    text: string;
+  } | null>(null);
   const [addingInterview, setAddingInterview] = useState(false);
   const [addingComment, setAddingComment] = useState(false);
   const [newInterview, setNewInterview] = useState('');
@@ -74,40 +78,68 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
             className="--inline-input --link-url-input"
             placeholder="URL"
             value={editingLink.url}
-            onChange={e => setEditingLink({ ...editingLink, url: e.target.value })}
-            onKeyDown={e => { if (e.key === 'Enter') saveLinkEdit(); if (e.key === 'Escape') setEditingLink(null); }}
+            onChange={(e) => setEditingLink({ ...editingLink, url: e.target.value })}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') saveLinkEdit();
+              if (e.key === 'Escape') setEditingLink(null);
+            }}
           />
           <input
             className="--inline-input --link-text-input"
             placeholder="Display text"
             value={editingLink.text}
-            onChange={e => setEditingLink({ ...editingLink, text: e.target.value })}
-            onKeyDown={e => { if (e.key === 'Enter') saveLinkEdit(); if (e.key === 'Escape') setEditingLink(null); }}
+            onChange={(e) => setEditingLink({ ...editingLink, text: e.target.value })}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') saveLinkEdit();
+              if (e.key === 'Escape') setEditingLink(null);
+            }}
           />
           <ActionButton iconClass="fas fa-check" color="green" size="sm" onClick={saveLinkEdit} />
-          <ActionButton iconClass="fas fa-times" color="red" size="sm" onClick={() => setEditingLink(null)} />
+          <ActionButton
+            iconClass="fas fa-times"
+            color="red"
+            size="sm"
+            onClick={() => setEditingLink(null)}
+          />
         </div>
       );
     }
 
     let isValid = false;
-    try { new URL(url); isValid = true; } catch {}
+    try {
+      new URL(url);
+      isValid = true;
+    } catch {}
     const display = text || url;
 
     return (
       <div className="--link-read">
         <span className="--link-label">{label}</span>
-        {display
-          ? isValid
-            ? <a className="--link-anchor" href={url} target="_blank" rel="noopener noreferrer">{display}</a>
-            : <><span>{display}</span><span className="--invalid-url">invalid URL</span></>
-          : <span className="--empty">none</span>
-        }
+        {display ? (
+          isValid ? (
+            <a className="--link-anchor" href={url} target="_blank" rel="noopener noreferrer">
+              {display}
+            </a>
+          ) : (
+            <>
+              <span>{display}</span>
+              <span className="--invalid-url">invalid URL</span>
+            </>
+          )
+        ) : (
+          <span className="--empty">none</span>
+        )}
         <ActionButton
           iconClass="fas fa-pencil-alt"
           color="blue"
           size="sm"
-          onClick={() => setEditingLink({ group, url, text: text || (group === 'primary' ? 'LinkedIn' : 'Direct') })}
+          onClick={() =>
+            setEditingLink({
+              group,
+              url,
+              text: text || (group === 'primary' ? 'LinkedIn' : 'Direct'),
+            })
+          }
         />
       </div>
     );
@@ -120,8 +152,8 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
           autoFocus
           className="--inline-input"
           value={editingValue}
-          onChange={e => setEditingValue(e.target.value)}
-          onKeyDown={e => {
+          onChange={(e) => setEditingValue(e.target.value)}
+          onKeyDown={(e) => {
             if (e.key === 'Enter') saveEdit();
             if (e.key === 'Escape') cancelEdit();
           }}
@@ -163,7 +195,7 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
       <div className="job-grid-row">
         <div className="--toggle-cell">
           <ActionButton
-            iconClass={expanded ? "fas fa-caret-down" : "fas fa-caret-right"}
+            iconClass={expanded ? 'fas fa-caret-down' : 'fas fa-caret-right'}
             color="blue"
             onClick={() => setExpanded(!expanded)}
           />
@@ -172,55 +204,66 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
         <div className="--truncate">{renderEditable('companyName', job.companyName)}</div>
         <div className="--truncate">{renderEditable('jobTitle', job.jobTitle)}</div>
         <div className="--truncate">
-          {editingField === 'dateApplied'
-            ? (
-              <DatePicker
-                selected={job.dateApplied ? parseISO(job.dateApplied) : null}
-                onChange={(date: Date | null) => {
-                  if (date) updateJob({ ...job, dateApplied: date.toISOString() });
-                  cancelEdit();
-                }}
-                onClickOutside={cancelEdit}
-                autoFocus
-                open
-              />
-            ) : (
-              <span className="--editable" onDoubleClick={() => startEdit('dateApplied', job.dateApplied)}>
-                {job.dateApplied ? format(parseISO(job.dateApplied), 'MMM dd, yyyy') : ''}
-              </span>
-            )
-          }
+          {editingField === 'dateApplied' ? (
+            <DatePicker
+              selected={job.dateApplied ? parseISO(job.dateApplied) : null}
+              onChange={(date: Date | null) => {
+                if (date) updateJob({ ...job, dateApplied: date.toISOString() });
+                cancelEdit();
+              }}
+              onClickOutside={cancelEdit}
+              autoFocus
+              open
+            />
+          ) : (
+            <span
+              className="--editable"
+              onDoubleClick={() => startEdit('dateApplied', job.dateApplied)}
+            >
+              {job.dateApplied ? format(parseISO(job.dateApplied), 'MMM dd, yyyy') : ''}
+            </span>
+          )}
         </div>
         <div className="--truncate">
-          {editingField === 'recruiterId'
-            ? (
-              <select
-                autoFocus
-                className="--inline-select"
-                value={editingValue}
-                onChange={e => { updateJob({ ...job, recruiterId: e.target.value }); cancelEdit(); }}
-                onBlur={cancelEdit}
-              >
-                <option value="">-- None</option>
-                {recruiters?.map((r: Obj) => (
-                  <option key={r.id} value={r.id}>{r.name}</option>
-                ))}
-              </select>
-            ) : (
-              <span className="--editable" onDoubleClick={() => startEdit('recruiterId', job.recruiterId)}>
-                {recruiter?.name}
-              </span>
-            )
-          }
+          {editingField === 'recruiterId' ? (
+            <select
+              autoFocus
+              className="--inline-select"
+              value={editingValue}
+              onChange={(e) => {
+                updateJob({ ...job, recruiterId: e.target.value });
+                cancelEdit();
+              }}
+              onBlur={cancelEdit}
+            >
+              <option value="">-- None</option>
+              {recruiters?.map((r: Obj) => (
+                <option key={r.id} value={r.id}>
+                  {r.name}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <span
+              className="--editable"
+              onDoubleClick={() => startEdit('recruiterId', job.recruiterId)}
+            >
+              {recruiter?.name}
+            </span>
+          )}
         </div>
 
         <div>
           <select
             className="--inline-select"
             value={job.workFrom}
-            onChange={e => updateJob({ ...job, workFrom: e.target.value })}
+            onChange={(e) => updateJob({ ...job, workFrom: e.target.value })}
           >
-            {WORK_FROM_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+            {WORK_FROM_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -228,9 +271,13 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
           <select
             className="--inline-select"
             value={job.status}
-            onChange={e => updateJob({ ...job, status: e.target.value })}
+            onChange={(e) => updateJob({ ...job, status: e.target.value })}
           >
-            {STATUS_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+            {STATUS_OPTIONS.map((opt) => (
+              <option key={opt} value={opt}>
+                {opt}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -249,7 +296,7 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
         </div>
       </div>
 
-      <div className={`--expansion-wrapper${expanded ? " is-open" : ""}`}>
+      <div className={`--expansion-wrapper${expanded ? ' is-open' : ''}`}>
         <div className="--expansion-inner">
           <div className="--expanded-content">
             <div className="--links-bar">
@@ -297,12 +344,18 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
                     className="--add-input"
                     placeholder="New interview..."
                     value={newInterview}
-                    onChange={e => setNewInterview(e.target.value)}
-                    onKeyDown={e => {
+                    onChange={(e) => setNewInterview(e.target.value)}
+                    onKeyDown={(e) => {
                       if (e.key === 'Enter') submitNewInterview();
-                      if (e.key === 'Escape') { setAddingInterview(false); setNewInterview(''); }
+                      if (e.key === 'Escape') {
+                        setAddingInterview(false);
+                        setNewInterview('');
+                      }
                     }}
-                    onBlur={() => { setAddingInterview(false); setNewInterview(''); }}
+                    onBlur={() => {
+                      setAddingInterview(false);
+                      setNewInterview('');
+                    }}
                   />
                 )}
               </div>
@@ -331,12 +384,18 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
                     className="--add-input"
                     placeholder="New comment..."
                     value={newComment}
-                    onChange={e => setNewComment(e.target.value)}
-                    onKeyDown={e => {
+                    onChange={(e) => setNewComment(e.target.value)}
+                    onKeyDown={(e) => {
                       if (e.key === 'Enter') submitNewComment();
-                      if (e.key === 'Escape') { setAddingComment(false); setNewComment(''); }
+                      if (e.key === 'Escape') {
+                        setAddingComment(false);
+                        setNewComment('');
+                      }
                     }}
-                    onBlur={() => { setAddingComment(false); setNewComment(''); }}
+                    onBlur={() => {
+                      setAddingComment(false);
+                      setNewComment('');
+                    }}
                   />
                 )}
               </div>
