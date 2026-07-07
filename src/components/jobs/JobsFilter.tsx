@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { useGetRecruiters } from "../../hooks/recruiterHooks";
-import { STATUS_OPTIONS, WORK_FROM_OPTIONS } from "../../utils/constants";
+import { FC, useState } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { useGetRecruiters } from '../../hooks/recruiterHooks';
+import { STATUS_OPTIONS, WORK_FROM_OPTIONS } from '../../utils/constants';
 import { Button } from '@bka-stuff/pe-mfe-utils';
-import { useJobFilterStore } from "../../store/jobs/jobFilterStore";
+import { useJobFilterStore } from '../../store/jobs/jobFilterStore';
 
 const JobsFilter: FC = () => {
   const { setFilter, setFilters, resetFilters } = useJobFilterStore();
@@ -36,33 +36,43 @@ const JobsFilter: FC = () => {
           className="jobs-filter-input"
           placeholder="Company"
           value={companyInput}
-          onChange={e => setCompanyInput(e.target.value)}
-          onKeyDown={e => e.key === 'Enter' && handleSearch()}
+          onChange={(e) => setCompanyInput(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
         />
 
         <select
           className="jobs-filter-select"
-          onChange={e => setFilter('status', e.target.value)}
+          onChange={(e) => setFilter('status', e.target.value)}
         >
           <option value="">Status</option>
-          {STATUS_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+          {STATUS_OPTIONS.map((opt) => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
+          ))}
         </select>
 
         <select
           className="jobs-filter-select"
-          onChange={e => setFilter('workFrom', e.target.value)}
+          onChange={(e) => setFilter('workFrom', e.target.value)}
         >
           <option value="">Work Location...</option>
-          {WORK_FROM_OPTIONS.map(opt => <option key={opt} value={opt}>{opt}</option>)}
+          {WORK_FROM_OPTIONS.map((opt) => (
+            <option key={opt} value={opt}>
+              {opt}
+            </option>
+          ))}
         </select>
 
         <select
           className="jobs-filter-select"
-          onChange={e => setFilter('recruiter', e.target.value)}
+          onChange={(e) => setFilter('recruiter', e.target.value)}
         >
           <option value="">Recruiter...</option>
           {recruiters?.map((r: Obj) => (
-            <option key={r.id} value={r.id}>{r.name}</option>
+            <option key={r.id} value={r.id}>
+              {r.name}
+            </option>
           ))}
         </select>
 
@@ -97,17 +107,11 @@ const JobsFilter: FC = () => {
 
       <div className="jobs-filter-checks">
         <label className="jobs-filter-checkbox">
-          <input
-            type="checkbox"
-            onChange={e => setFilter('archived', e.target.checked)}
-          />
+          <input type="checkbox" onChange={(e) => setFilter('archived', e.target.checked)} />
           Include archived
         </label>
         <label className="jobs-filter-checkbox">
-          <input
-            type="checkbox"
-            onChange={e => setFilter('includeDeclined', e.target.checked)}
-          />
+          <input type="checkbox" onChange={(e) => setFilter('includeDeclined', e.target.checked)} />
           Include declined
         </label>
       </div>

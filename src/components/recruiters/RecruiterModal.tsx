@@ -1,12 +1,12 @@
-import { FC, SyntheticEvent, useState } from "react";
-import { Modal, Button, Label, Input } from "@bka-stuff/pe-mfe-utils";
-import { useCreateRecruiter } from "../../hooks/recruiterHooks";
-import "./styles.css";
+import { FC, SyntheticEvent, useState } from 'react';
+import { Modal, Button, Label, Input } from '@bka-stuff/pe-mfe-utils';
+import { useCreateRecruiter } from '../../hooks/recruiterHooks';
+import './styles.css';
 
 type RecruiterModalProps = {
   isOpen: boolean;
   onClose: () => void;
-}
+};
 
 const RecruiterModal: FC<RecruiterModalProps> = ({ isOpen, onClose }) => {
   const [name, setName] = useState('');
@@ -89,10 +89,10 @@ const RecruiterModal: FC<RecruiterModalProps> = ({ isOpen, onClose }) => {
 
           <Label text="Rating:" />
           <div className="--stars tw:mt-[16px]">
-            {[1, 2, 3, 4, 5].map(i => (
+            {[1, 2, 3, 4, 5].map((i) => (
               <i
                 key={i}
-                className={i <= displayRating ? "fas fa-star" : "far fa-star"}
+                className={i <= displayRating ? 'fas fa-star' : 'far fa-star'}
                 onClick={() => setRating(i)}
                 onMouseEnter={() => setHoverRating(i)}
                 onMouseLeave={() => setHoverRating(0)}

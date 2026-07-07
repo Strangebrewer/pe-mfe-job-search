@@ -13,6 +13,6 @@ createAuthClient({
   axiosAuth,
   onLogout: () => {
     // whatever the shell should do
-    console.log("Logged out");
+    console.log('Logged out');
   },
 }).attach();

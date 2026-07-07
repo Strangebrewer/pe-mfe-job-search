@@ -11,11 +11,13 @@ Port: 3003. Accessed via the shell at `/job-search/*`.
 ## Domain Model
 
 ### Job
+
 Fields: `jobTitle`, `companyName`, `workFrom` (enum), `status` (enum), `dateApplied`, `recruiterId?`, `companyAddress?`, `companyCity?`, `companyState?`, `pointOfContact?`, `pocTitle?`, `links?` (primary + secondary URL), `interviews?` (array), `comments?` (array), `archived?`
 
 `workFrom` and `status` option arrays are defined in `src/utils/constants.ts`. Default status on create is `'applied'`.
 
 ### Recruiter
+
 Fields: `name`, `company`, `email`, `phone?`, `rating?` (1–5 star), `comments?` (array), `archived?`
 
 ---
@@ -62,12 +64,15 @@ src/
 ## Key Patterns
 
 ### Inline editing
+
 Double-click any field in an expanded row to edit it in place. Saves on blur. Array fields (interviews, comments) have add/remove controls.
 
 ### Filter state
+
 `jobFilterStore` (Zustand) holds all filter values. `useGetJobs` passes the full filter object as query params to `GET /jobs`. The full params object is included in the TanStack Query key so each filter combination caches independently.
 
 ### Tracing
+
 `baseApi.ts` adds `X-Trace-ID: <uuid>` on every request. The header is sent but the frontend doesn't yet poll go-tracer for results — that's the hook point for future tracing integration.
 
 ---
@@ -80,7 +85,9 @@ Double-click any field in an expanded row to edit it in place. Saves on blur. Ar
 ---
 
 ## Tailwind
+
 Uses `tw:` prefix (`tw:flex`, `tw:text-sm`, etc.) — required by the MFE Tailwind config.
 
 ## pe-mfe-utils
+
 `@bka-stuff/pe-mfe-utils` is installed via `github:` URL (public tarball). Never use `pnpm link` or workspace overrides — breaks CI.

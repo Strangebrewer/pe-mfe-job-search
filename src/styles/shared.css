@@ -12,7 +12,7 @@
 }
 
 .--inline-input {
-  border: 1px solid #BC13FE;
+  border: 1px solid #bc13fe;
   border-radius: 3px;
   font-size: inherit;
   padding: 1px 4px;
@@ -22,7 +22,7 @@
 }
 
 .--inline-select {
-  border: 1px solid #BC13FE;
+  border: 1px solid #bc13fe;
   border-radius: 3px;
   font-size: inherit;
   padding: 2px 4px;
@@ -75,7 +75,7 @@
   }
 
   & .--add-input {
-    border: 1px solid #BC13FE;
+    border: 1px solid #bc13fe;
     border-radius: 4px;
     font-size: 14px;
     margin-top: 4px;
