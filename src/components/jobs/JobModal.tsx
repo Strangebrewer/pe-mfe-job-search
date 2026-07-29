@@ -1,5 +1,12 @@
 import { FC, SyntheticEvent, useState } from 'react';
-import { Modal, Button, Label, Input, Select } from '@bka-stuff/pe-mfe-utils';
+import {
+  Modal,
+  Input,
+  Select,
+  ModalContent,
+  InputGroup,
+  ModalButtons,
+} from '@bka-stuff/pe-mfe-utils';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useCreateJob } from '../../hooks/jobHooks';
@@ -64,11 +71,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <Modal isOpen={isOpen} close={closeModal}>
-      <div className="job-modal-body">
-        <h2 className="tw:mb-[16px]">New Job</h2>
-        <form onSubmit={submit}>
-          <div>
-            <Label text="Job Title *" />
+      <ModalContent heading="New Job">
+        <form onSubmit={submit} className="tw:w-[420px]">
+          <InputGroup label="Job Title *">
             <Input
               type="text"
               name="jobTitle"
@@ -77,10 +82,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               full
               autofocus
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Company Name *" />
+          <InputGroup label="Company Name *">
             <Input
               type="text"
               name="companyName"
@@ -88,10 +92,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => set('companyName', e.target.value)}
               full
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Work Location *" />
+          <InputGroup label="Work Location *">
             <Select
               name="workFrom"
               value={form.workFrom}
@@ -102,10 +105,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               <option value="hybrid">Hybrid</option>
               <option value="on-site">On-site</option>
             </Select>
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Recruiter" />
+          <InputGroup label="Recruiter">
             <Select
               name="recruiterId"
               value={form.recruiterId}
@@ -119,20 +121,18 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
                 </option>
               ))}
             </Select>
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Date Applied *" />
+          <InputGroup label="Date Applied *">
             <DatePicker
               wrapperClassName="job-modal-date-picker"
               selected={form.dateApplied}
               onChange={(date: Date | null) => set('dateApplied', date)}
               placeholderText="Select a date"
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Company Address" />
+          <InputGroup label="Company Address">
             <Input
               type="text"
               name="companyAddress"
@@ -140,10 +140,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => set('companyAddress', e.target.value)}
               full
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Company City" />
+          <InputGroup label="Company City">
             <Input
               type="text"
               name="companyCity"
@@ -151,10 +150,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => set('companyCity', e.target.value)}
               full
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Company State" />
+          <InputGroup label="Company State">
             <Input
               type="text"
               name="companyState"
@@ -162,10 +160,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => set('companyState', e.target.value)}
               full
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Point of Contact" />
+          <InputGroup label="Point of Contact">
             <Input
               type="text"
               name="pointOfContact"
@@ -173,10 +170,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => set('pointOfContact', e.target.value)}
               full
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="POC Title" />
+          <InputGroup label="POC Title">
             <Input
               type="text"
               name="pocTitle"
@@ -184,15 +180,17 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => set('pocTitle', e.target.value)}
               full
             />
-          </div>
+          </InputGroup>
 
-          <div className="tw:mt-[16px] tw:flex tw:justify-end">
-            <button type="submit" style={{ display: 'none' }} />
-            <Button color="red" text="Cancel" onClick={closeModal} />
-            <Button color="green" text="Save" onClick={submit} disabled={!validateForm()} last />
-          </div>
+          <ModalButtons
+            onClose={closeModal}
+            onConfirm={submit}
+            isDisabled={!validateForm()}
+            confirmText="Save"
+            confirmColor="green"
+          />
         </form>
-      </div>
+      </ModalContent>
     </Modal>
   );
 };
