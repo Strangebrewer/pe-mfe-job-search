@@ -11,6 +11,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { useCreateJob } from '../../hooks/jobHooks';
 import { useGetRecruiters } from '../../hooks/recruiterHooks';
+import CompanySuggestions from './CompanySuggestions';
 
 type JobModalProps = {
   isOpen: boolean;
@@ -85,12 +86,9 @@ const JobModal: FC<JobModalProps> = ({ isOpen, onClose }) => {
           </InputGroup>
 
           <InputGroup label="Company Name *">
-            <Input
-              type="text"
-              name="companyName"
+            <CompanySuggestions
               value={form.companyName}
-              onChange={(e) => set('companyName', e.target.value)}
-              full
+              onChange={(value) => set('companyName', value)}
             />
           </InputGroup>
 

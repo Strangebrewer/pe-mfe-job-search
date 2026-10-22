@@ -40,6 +40,32 @@
   }
 }
 
+.company-suggestions {
+  position: relative;
+
+  & > .--suggestions-list {
+    background-color: var(--surface);
+    border: 1px solid var(--nPurple);
+    border-radius: 4px;
+    left: 0;
+    max-height: 240px;
+    overflow-y: auto;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 10;
+
+    & > li {
+      cursor: pointer;
+      padding: 6px 10px;
+
+      &:hover {
+        background-color: var(--nPurpleFaint);
+      }
+    }
+  }
+}
+
 .jobs-grid {
   max-height: 800px;
   overflow-y: auto;
@@ -55,7 +81,7 @@
 .jobs-grid-header,
 .job-grid-row {
   display: grid;
-  grid-template-columns: 40px 1.5fr 2fr 160px 1fr 120px 150px 70px;
+  grid-template-columns: 40px 32px 1.5fr 2fr 160px 1fr 120px 150px 70px;
 }
 
 .jobs-grid-header {
@@ -123,6 +149,16 @@
       height: 100%;
       padding: 10px 8px;
       width: 100%;
+    }
+  }
+
+  & > .--reported-cell {
+    justify-content: center;
+    padding: 10px 0;
+
+    & input {
+      accent-color: var(--nPurple);
+      cursor: pointer;
     }
   }
 

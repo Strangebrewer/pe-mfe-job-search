@@ -21,7 +21,10 @@ export const useCreateJob = () => {
       const response = await jobApi.create(payload, traceId);
       return response.data;
     },
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-jobs'] }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['get-jobs'] });
+      queryClient.invalidateQueries({ queryKey: ['get-companies'] });
+    },
   });
 };
 
@@ -39,6 +42,28 @@ export const useUpdateJob = () => {
       return response.data;
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-jobs'] }),
+  });
+};
+
+export const useSetJobReported = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationKey: ['set-job-reported'],
+    mutationFn: async ({ id, reported }: { id: string; reported: boolean }) => {
+      const response = await jobApi.setReported(id, reported);
+      return response.data;
+    },
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ['get-jobs'] }),
+  });
+};
+
+export const useGetCompanies = () => {
+  return useQuery({
+    queryKey: ['get-companies'],
+    queryFn: async () => {
+      const response = await jobApi.getCompanies();
+      return response?.data as string[];
+    },
   });
 };
 
