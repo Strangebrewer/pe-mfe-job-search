@@ -1,5 +1,12 @@
 import { FC, SyntheticEvent, useState } from 'react';
-import { Modal, Button, Label, Input } from '@bka-stuff/pe-mfe-utils';
+import {
+  Modal,
+  Label,
+  Input,
+  ModalContent,
+  InputGroup,
+  ModalButtons,
+} from '@bka-stuff/pe-mfe-utils';
 import { useCreateRecruiter } from '../../hooks/recruiterHooks';
 import './styles.css';
 
@@ -39,11 +46,9 @@ const RecruiterModal: FC<RecruiterModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <Modal isOpen={isOpen} close={closeModal}>
-      <div className="recruiter-modal-body">
-        <h2 className="tw:mb-[16px]">New Recruiter</h2>
+      <ModalContent heading="New Recruiter">
         <form onSubmit={submit}>
-          <div>
-            <Label text="Name" />
+          <InputGroup label="Name">
             <Input
               type="text"
               name="name"
@@ -52,10 +57,9 @@ const RecruiterModal: FC<RecruiterModalProps> = ({ isOpen, onClose }) => {
               full
               autofocus
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Company" />
+          <InputGroup label="Company">
             <Input
               type="text"
               name="company"
@@ -63,10 +67,9 @@ const RecruiterModal: FC<RecruiterModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => setCompany(e.target.value)}
               full
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Phone" />
+          <InputGroup label="Phone">
             <Input
               type="text"
               name="phone"
@@ -74,10 +77,9 @@ const RecruiterModal: FC<RecruiterModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => setPhone(e.target.value)}
               full
             />
-          </div>
+          </InputGroup>
 
-          <div>
-            <Label text="Email" />
+          <InputGroup label="Email">
             <Input
               type="text"
               name="email"
@@ -85,7 +87,7 @@ const RecruiterModal: FC<RecruiterModalProps> = ({ isOpen, onClose }) => {
               onChange={(e) => setEmail(e.target.value)}
               full
             />
-          </div>
+          </InputGroup>
 
           <Label text="Rating:" />
           <div className="--stars tw:mt-[16px]">
@@ -100,19 +102,15 @@ const RecruiterModal: FC<RecruiterModalProps> = ({ isOpen, onClose }) => {
             ))}
           </div>
 
-          <div className="tw:mt-[16px] tw:flex tw:justify-end">
-            <button type="submit" style={{ display: 'none' }} />
-            <Button color="red" text="Cancel" onClick={closeModal} />
-            <Button
-              color="blue"
-              text="Save"
-              onClick={submit}
-              disabled={!name || !company || !email}
-              last
-            />
-          </div>
+          <ModalButtons
+            onClose={closeModal}
+            onConfirm={submit}
+            confirmText="Save"
+            confirmColor="blue"
+            isDisabled={!name || !company || !email}
+          />
         </form>
-      </div>
+      </ModalContent>
     </Modal>
   );
 };

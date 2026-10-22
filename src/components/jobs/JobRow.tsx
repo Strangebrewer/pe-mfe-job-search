@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 import { useGetRecruiters } from '../../hooks/recruiterHooks';
-import { useUpdateJob } from '../../hooks/jobHooks';
+import { useSetJobReported, useUpdateJob } from '../../hooks/jobHooks';
 import { ActionButton } from '@bka-stuff/pe-mfe-utils';
 import DatePicker from 'react-datepicker';
 import { format, parseISO } from 'date-fns';
@@ -10,7 +10,7 @@ import { STATUS_OPTIONS, WORK_FROM_OPTIONS } from '../../utils/constants';
 type JobRowProps = {
   job: Obj;
   onClickDelete: (id: string, name: string) => void;
-  onClickArchive: (id: string, name: string) => void;
+  onClickArchive: (job: Obj) => void;
 };
 
 const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
@@ -31,6 +31,7 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
   const { data: recruiters } = useGetRecruiters();
   const recruiter = recruiters?.find((r: Obj) => r.id === job.recruiterId);
   const { mutate: updateJob } = useUpdateJob();
+  const { mutate: setReported } = useSetJobReported();
 
   function startEdit(field: string, value: string) {
     setEditingField(field);
@@ -201,6 +202,15 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
           />
         </div>
 
+        <div className="--reported-cell">
+          <input
+            type="checkbox"
+            title="company used for unemployment reporting"
+            checked={!!job.reported}
+            onChange={(e) => setReported({ id: job.id, reported: e.target.checked })}
+          />
+        </div>
+
         <div className="--truncate">{renderEditable('companyName', job.companyName)}</div>
         <div className="--truncate">{renderEditable('jobTitle', job.jobTitle)}</div>
         <div className="--truncate">
@@ -286,7 +296,7 @@ const JobRow: FC<JobRowProps> = ({ job, onClickDelete, onClickArchive }) => {
             iconClass="fas fa-archive"
             title="archive this job"
             color="blue"
-            onClick={() => onClickArchive(job.id, job.jobTitle)}
+            onClick={() => onClickArchive(job)}
           />
           <ActionButton
             color="red"

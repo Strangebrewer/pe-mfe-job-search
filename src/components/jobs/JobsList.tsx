@@ -69,8 +69,8 @@ const JobsList: FC = () => {
     setModalState({ type: 'delete', item: { id, name } });
   }
 
-  function openArchiveModal(id: string, name: string) {
-    setModalState({ type: 'archive', item: { id, name } });
+  function openArchiveModal(job: Obj) {
+    setModalState({ type: 'archive', item: job });
   }
 
   function confirmDelete() {
@@ -79,7 +79,7 @@ const JobsList: FC = () => {
   }
 
   function confirmArchive() {
-    updateJob({ id: modalState.item.id, archived: true });
+    updateJob({ ...modalState.item, archived: true });
     setModalState({ type: null, item: null });
   }
 
@@ -92,9 +92,11 @@ const JobsList: FC = () => {
         onClose={() => setModalState({ type: null, item: null })}
       />
       <DeleteConfirmationModal
+        text="Are you sure you want to archive"
         isOpen={modalState.type === 'archive'}
-        name={modalState.item?.name}
+        name={modalState.item?.jobTitle}
         onConfirm={confirmArchive}
+        confirmText="Archive"
         onClose={() => setModalState({ type: null, item: null })}
       />
       <h2>
@@ -104,6 +106,7 @@ const JobsList: FC = () => {
       <JobsFilter />
       <div className="jobs-grid">
         <div className="jobs-grid-header">
+          <div></div>
           <div></div>
           {renderSortHeader('Company', 'companyName')}
           {renderSortHeader('Job Title', 'jobTitle')}
